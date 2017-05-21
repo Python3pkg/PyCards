@@ -42,7 +42,7 @@ class PlayingCard(BaseCard):
     @classmethod
     def generate_cards(cls, config=DEFAULT_CARDS_CONFIG):
         props = ('rank', 'suit', )
-        card_dicts = [dict(zip(props, c.split('_'))) for c in config]
+        card_dicts = [dict(list(zip(props, c.split('_')))) for c in config]
         for card_dict in card_dicts:
             yield cls.from_dict(card_dict=card_dict)
 
@@ -64,5 +64,5 @@ class PlayingCardWithImages(PlayingCard):
             rank, suit = card.split('_')
             front_image = '{0}/{1}-{2}.png'.format(config['image_path'], rank, suit)
             back_image = '{0}/back.png'.format(config['image_path'])
-            card_dict = dict(zip(props, (rank, suit, front_image, back_image, )))
+            card_dict = dict(list(zip(props, (rank, suit, front_image, back_image, ))))
             yield cls.from_dict(card_dict=card_dict)
